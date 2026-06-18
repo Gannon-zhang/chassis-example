@@ -17,7 +17,7 @@ Then explore:
 
 from __future__ import annotations
 
-from contextlib import asynccontextmanager
+import logging
 
 from chassis_admin.app import create_admin_app
 from chassis_admin.auth import AdminAuthConfig
@@ -33,6 +33,7 @@ from chassis_storage.protocols import StorageBackend
 from chassis_storage.setup import setup_storage
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from sqlalchemy import create_engine
 
 from example.config import ExampleConfig
 from example.models import Base, Book
@@ -41,15 +42,24 @@ from example.routes import book_router
 
 import uvicorn
 
+logger: logging.Logger = logging.getLogger("chassis-example")
 
-async def _create_tables() -> None:
-    """Create all database tables using the async session factory."""
-    from chassis_repo.session import _session_factory
 
-    assert _session_factory is not None
-    async with _session_factory() as session:
-        conn = await session.connection()
-        await conn.run_sync(Base.metadata.create_all)
+def _create_tables_sync(database_url: str) -> None:
+    """Create all database tables using a sync engine.
+
+    Runs immediately (not via lifespan) so failures are visible at startup.
+    Handles both SQLite and PostgreSQL by stripping the async driver prefix.
+    """
+    import re
+
+    sync_url: str = re.sub(r"\+aiosqlite|\+asyncpg", "", database_url)
+    engine = create_engine(sync_url, echo=False)
+    try:
+        Base.metadata.create_all(engine)
+        logger.info("Database tables created successfully (engine: %s)", engine.url)
+    finally:
+        engine.dispose()
 
 
 async def on_auth_success(user_info, tokens) -> JSONResponse:
@@ -71,16 +81,10 @@ def create_app() -> FastAPI:
     """
     config: ExampleConfig = ExampleConfig()
 
-    @asynccontextmanager
-    async def lifespan(_app: FastAPI):
-        await _create_tables()
-        yield
-
     # FastAPI app (business owns the process)
     app: FastAPI = FastAPI(
         title=config.app_name,
         version=config.app_version,
-        lifespan=lifespan,
     )
 
     # --- chassis-core: security middleware ---
@@ -94,6 +98,7 @@ def create_app() -> FastAPI:
 
     # --- chassis-repo: database (PostgreSQL via Docker) ---
     setup_repo(config=config)
+    _create_tables_sync(config.database_url)
     # ------------------------------------------------------
 
     # --- chassis-cache: Redis (via Docker) ---
