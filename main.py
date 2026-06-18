@@ -53,7 +53,10 @@ def _create_tables_sync(database_url: str) -> None:
     """
     import re
 
-    sync_url: str = re.sub(r"\+aiosqlite|\+asyncpg", "", database_url)
+    if "postgresql" in database_url:
+        sync_url: str = re.sub(r"\+asyncpg", "+pg8000", database_url)
+    else:
+        sync_url: str = re.sub(r"\+aiosqlite", "", database_url)
     engine = create_engine(sync_url, echo=False)
     try:
         Base.metadata.create_all(engine)
