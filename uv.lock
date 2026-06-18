@@ -94,76 +94,39 @@ wheels = [
 [[package]]
 name = "chassis-admin"
 version = "0.1.0"
-source = { path = "../../../../../tmp/chassis-wheels/chassis_admin-0.1.0-py3-none-any.whl" }
+source = { git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fadmin#136dc65ef9d7356043e405996e5b59b1fe210740" }
 dependencies = [
     { name = "chassis-core" },
     { name = "chassis-repo" },
     { name = "jinja2" },
 ]
-wheels = [
-    { filename = "chassis_admin-0.1.0-py3-none-any.whl", hash = "sha256:d30e6692f936cc57d4d773c68b10918c968e8120062ca796f7f9d4cbe5e878bf" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "chassis-core" },
-    { name = "chassis-repo" },
-    { name = "jinja2", specifier = ">=3.0,<4.0" },
-]
 
 [[package]]
 name = "chassis-auth"
 version = "0.1.0"
-source = { path = "../../../../../tmp/chassis-wheels/chassis_auth-0.1.0-py3-none-any.whl" }
+source = { git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fauth#136dc65ef9d7356043e405996e5b59b1fe210740" }
 dependencies = [
     { name = "chassis-core" },
 ]
-wheels = [
-    { filename = "chassis_auth-0.1.0-py3-none-any.whl", hash = "sha256:189eacc1a645d402423904ffcae2d29e27ab4f368012e94815f302b710336591" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "chassis-core" }]
 
 [[package]]
 name = "chassis-cache"
 version = "0.1.0"
-source = { path = "../../../../../tmp/chassis-wheels/chassis_cache-0.1.0-py3-none-any.whl" }
+source = { git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fcache#136dc65ef9d7356043e405996e5b59b1fe210740" }
 dependencies = [
     { name = "chassis-core" },
     { name = "redis" },
-]
-wheels = [
-    { filename = "chassis_cache-0.1.0-py3-none-any.whl", hash = "sha256:702a4b14b814ec672c2359678a2e06232e031bb6cf570a2c6683d8ae55ba86e7" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "chassis-core" },
-    { name = "redis", specifier = ">=5.0,<6.0" },
 ]
 
 [[package]]
 name = "chassis-core"
 version = "0.1.0"
-source = { path = "../../../../../tmp/chassis-wheels/chassis_core-0.1.0-py3-none-any.whl" }
+source = { git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fcore#136dc65ef9d7356043e405996e5b59b1fe210740" }
 dependencies = [
     { name = "fastapi" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
 ]
-wheels = [
-    { filename = "chassis_core-0.1.0-py3-none-any.whl", hash = "sha256:fd922226b9f32f88a65ea7a21e4e3298339c91314510a8692b738dc502e72ac3" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "fastapi", specifier = ">=0.115.0,<0.116" },
-    { name = "pydantic", specifier = ">=2.0,<3.0" },
-    { name = "pydantic-settings", specifier = ">=2.0,<3.0" },
-    { name = "redis", marker = "extra == 'redis'", specifier = ">=5.0,<6.0" },
-]
-provides-extras = ["redis"]
 
 [[package]]
 name = "chassis-example"
@@ -196,12 +159,12 @@ dev = [
 requires-dist = [
     { name = "aiosqlite", specifier = ">=0.20.0" },
     { name = "asyncpg", specifier = ">=0.30.0" },
-    { name = "chassis-admin", path = "../../../../../tmp/chassis-wheels/chassis_admin-0.1.0-py3-none-any.whl" },
-    { name = "chassis-auth", path = "../../../../../tmp/chassis-wheels/chassis_auth-0.1.0-py3-none-any.whl" },
-    { name = "chassis-cache", path = "../../../../../tmp/chassis-wheels/chassis_cache-0.1.0-py3-none-any.whl" },
-    { name = "chassis-core", path = "../../../../../tmp/chassis-wheels/chassis_core-0.1.0-py3-none-any.whl" },
-    { name = "chassis-repo", path = "../../../../../tmp/chassis-wheels/chassis_repo-0.1.0-py3-none-any.whl" },
-    { name = "chassis-storage", path = "../../../../../tmp/chassis-wheels/chassis_storage-0.1.0-py3-none-any.whl" },
+    { name = "chassis-admin", git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fadmin" },
+    { name = "chassis-auth", git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fauth" },
+    { name = "chassis-cache", git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fcache" },
+    { name = "chassis-core", git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fcore" },
+    { name = "chassis-repo", git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Frepo" },
+    { name = "chassis-storage", git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fstorage" },
     { name = "fastapi", specifier = ">=0.115.0,<0.116" },
     { name = "jinja2", specifier = ">=3.1.0" },
     { name = "pg8000", specifier = ">=1.31.0" },
@@ -219,36 +182,20 @@ dev = [
 [[package]]
 name = "chassis-repo"
 version = "0.1.0"
-source = { path = "../../../../../tmp/chassis-wheels/chassis_repo-0.1.0-py3-none-any.whl" }
+source = { git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Frepo#136dc65ef9d7356043e405996e5b59b1fe210740" }
 dependencies = [
     { name = "chassis-core" },
     { name = "pydantic" },
     { name = "sqlalchemy", extra = ["asyncio"] },
 ]
-wheels = [
-    { filename = "chassis_repo-0.1.0-py3-none-any.whl", hash = "sha256:14989a352d637076a23a9c0d90258399837f559154edf2097f18e9d982ce53e8" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "chassis-core" },
-    { name = "pydantic", specifier = ">=2.0,<3.0" },
-    { name = "sqlalchemy", extras = ["asyncio"], specifier = ">=2.0,<3.0" },
-]
 
 [[package]]
 name = "chassis-storage"
 version = "0.1.0"
-source = { path = "../../../../../tmp/chassis-wheels/chassis_storage-0.1.0-py3-none-any.whl" }
+source = { git = "https://github.com/Gannon-zhang/chassis.git?subdirectory=chassis%2Fpackages%2Fstorage#136dc65ef9d7356043e405996e5b59b1fe210740" }
 dependencies = [
     { name = "chassis-core" },
 ]
-wheels = [
-    { filename = "chassis_storage-0.1.0-py3-none-any.whl", hash = "sha256:5d0e42c9da3255fa7908ac6920032b7264f0f5e945f2fa1a97224e6a0cac4a8a" },
-]
-
-[package.metadata]
-requires-dist = [{ name = "chassis-core" }]
 
 [[package]]
 name = "click"
