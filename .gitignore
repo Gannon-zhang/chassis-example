@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+chassis_storage/
+test.db*
+chassis.db
+.idea/
+*.db
+

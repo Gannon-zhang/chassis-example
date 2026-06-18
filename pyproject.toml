@@ -1,0 +1,40 @@
+[project]
+name = "chassis-example"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "chassis-core",
+    "chassis-auth",
+    "chassis-cache",
+    "chassis-repo",
+    "chassis-admin",
+    "chassis-storage",
+    "fastapi>=0.115.0,<0.116",
+    "uvicorn[standard]>=0.34.0",
+    "asyncpg>=0.30.0",
+    "aiosqlite>=0.20.0",
+    "jinja2>=3.1.0",
+    "python-multipart>=0.0.12",
+]
+
+[tool.uv.sources]
+chassis-core = { git = "https://github.com/Gannon-zhang/chassis.git", subdirectory = "chassis/packages/core" }
+chassis-auth = { git = "https://github.com/Gannon-zhang/chassis.git", subdirectory = "chassis/packages/auth" }
+chassis-cache = { git = "https://github.com/Gannon-zhang/chassis.git", subdirectory = "chassis/packages/cache" }
+chassis-repo = { git = "https://github.com/Gannon-zhang/chassis.git", subdirectory = "chassis/packages/repo" }
+chassis-admin = { git = "https://github.com/Gannon-zhang/chassis.git", subdirectory = "chassis/packages/admin" }
+chassis-storage = { git = "https://github.com/Gannon-zhang/chassis.git", subdirectory = "chassis/packages/storage" }
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24.0",
+    "httpx>=0.28.0",
+]
